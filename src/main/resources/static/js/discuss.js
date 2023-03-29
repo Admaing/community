@@ -1,70 +1,69 @@
-//html页面加载完之后
-$(function (){
-    //相当于window.onload 页面加载后调用
+$(function(){
     $("#topBtn").click(setTop);
     $("#wonderfulBtn").click(setWonderful);
     $("#deleteBtn").click(setDelete);
 });
 
-function like(btn,entityType,entityId,entityUserId,postId){
+function like(btn, entityType, entityId, entityUserId, postId) {
     $.post(
-        CONTEXT_PATH+"/like",
+        CONTEXT_PATH + "/like",
         {"entityType":entityType,"entityId":entityId,"entityUserId":entityUserId,"postId":postId},
-        function (data){
+        function(data) {
             data = $.parseJSON(data);
-            if (data.code==0){
+            if(data.code == 0) {
                 $(btn).children("i").text(data.likeCount);
-                $(btn).children("b").text(data.likeStatus==1?"已赞":"赞");
-            }else{
-                alert(data.msg)
+                $(btn).children("b").text(data.likeStatus==1?'已赞':"赞");
+            } else {
+                alert(data.msg);
             }
         }
     );
 }
 
-//置顶
-function setTop(){
+// 置顶
+function setTop() {
     $.post(
-        CONTEXT_PATH+"/discuss/top",
+        CONTEXT_PATH + "/discuss/top",
         {"id":$("#postId").val()},
-        function (data){
+        function(data) {
             data = $.parseJSON(data);
-            if (data.code==0){
-                $("#topBtn").attr("disabled","disabled");
-            }else{
+            if(data.code == 0) {
+                $("#topBtn").attr("disabled", "disabled");
+            } else {
                 alert(data.msg);
             }
         }
-    )
-}
-//加精
-function setWonderful(){
-    $.post(
-        CONTEXT_PATH+"/discuss/wonderful",
-        {"id":$("#postId").val()},
-        function (data){
-            data = $.parseJSON(data);
-            if (data.code==0){
-                $("#wonderfulBtn").attr("disabled","disabled");
-            }else{
-                alert(data.msg);
-            }
-        }
-    )
+    );
 }
 
-//删除
-function setDelete(){
+// 加精
+function setWonderful() {
     $.post(
-        CONTEXT_PATH+"/discuss/delete",
+        CONTEXT_PATH + "/discuss/wonderful",
         {"id":$("#postId").val()},
-        function (data){
+        function(data) {
             data = $.parseJSON(data);
-            if (data.code==0){
-                location.href=CONTEXT_PATH+"/index";
-            }else{
+            if(data.code == 0) {
+                $("#wonderfulBtn").attr("disabled", "disabled");
+            } else {
                 alert(data.msg);
             }
         }
-    )
+    );
+}
+
+// 删除
+function setDelete() {
+    $.post(
+        CONTEXT_PATH + "/discuss/delete",
+        {"id":$("#postId").val()},
+        function(data) {
+            data = $.parseJSON(data);
+            if(data.code == 0) {
+                location.href = CONTEXT_PATH + "/index";
+            } else {
+                alert(data.msg);
+            }
+        }
+    );
 }

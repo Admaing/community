@@ -2,70 +2,66 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.newcoder.community.dao.DiscussPostMapper">
-    <!--    提炼并复用-->
+<mapper namespace="com.nowcoder.community.dao.DiscussPostMapper">
 
     <sql id="selectFields">
-        id,user_id,title,content,type,status,create_time,comment_count,score
-    </sql>
-    <sql id="insertFields">
-        user_id,title,content,type,status,create_time,comment_count,score
+        id, user_id, title, content, type, status, create_time, comment_count, score
     </sql>
 
-    <select id="selectDiscussPostById" resultType="DiscussPost">
+    <select id="selectDiscussPosts" resultType="DiscussPost">
         select <include refid="selectFields"></include>
         from discuss_post
-        where id = #{id}
+        where status != 2
+        <if test="userId!=0">
+            and user_id = #{userId}
+        </if>
+        <if test="orderMode==0">
+            order by type desc, create_time desc
+        </if>
+        <if test="orderMode==1">
+            order by type desc, score desc, create_time desc
+        </if>
+        limit #{offset}, #{limit}
     </select>
+
+    <select id="selectDiscussPostRows" resultType="int">
+        select count(id)
+        from discuss_post
+        where status != 2
+        <if test="userId!=0">
+            and user_id = #{userId}
+        </if>
+    </select>
+
+    <sql id="insertFields">
+        user_id, title, content, type, status, create_time, comment_count, score
+    </sql>
 
     <insert id="insertDiscussPost" parameterType="DiscussPost" keyProperty="id">
         insert into discuss_post(<include refid="insertFields"></include>)
         values(#{userId},#{title},#{content},#{type},#{status},#{createTime},#{commentCount},#{score})
     </insert>
-    
-<!--    list不用声明能检测到 按照创建时间排                             order by type desc,create_time des序c-->
-    <select id="selectDiscussPosts" resultType="DiscussPost">
-        select <include refid="selectFields"></include>
+
+    <select id="selectDiscussPostById" resultType="DiscussPost">
+        select
+        <include refid="selectFields"></include>
         from discuss_post
-        where status!=2
-        <if test="userId!=0">
-            and user_id = #{userId}
-        </if>
-        <if test="orderMode==0">
-            order by type desc,create_time desc
-        </if>
-        <if test="orderMode==1">
-            order by type desc,score desc,create_time desc
-        </if>
-        limit #{offset},#{limit}
+        where id = #{id}
     </select>
 
-   <!--    标签对应接口中方法，写对应的接口方法,正常来讲要写完整包名，但是在properties已经配置实体类位置-->
-    <select id="selectDiscussPostRows" resultType="int">
-        select count(id)
-        from discuss_post
-        where status!=2
-        <if test="userId!=0">
-            and user_id = #{userId}
-        </if>
-
-    </select>
-
-
-    <update id="updateCommentCount" >
-        update discuss_post set comment_count = #{commentCount} where id=#{id}
+    <update id="updateCommentCount">
+        update discuss_post set comment_count = #{commentCount} where id = #{id}
     </update>
 
     <update id="updateType">
-        update discuss_post set type = #{type} where  id=#{id}
+        update discuss_post set type = #{type} where id = #{id}
     </update>
 
     <update id="updateStatus">
-        update discuss_post set status = #{status} where  id=#{id}
+        update discuss_post set status = #{status} where id = #{id}
     </update>
 
     <update id="updateScore">
         update discuss_post set score = #{score} where id = #{id}
     </update>
-
 </mapper>

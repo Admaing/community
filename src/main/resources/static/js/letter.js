@@ -4,23 +4,21 @@ $(function(){
 });
 
 function send_letter() {
-	console.log("send_letter")
 	$("#sendModal").modal("hide");
 
 	var toName = $("#recipient-name").val();
 	var content = $("#message-text").val();
-
 	$.post(
 		CONTEXT_PATH + "/letter/send",
 		{"toName":toName,"content":content},
-		function (data){
-			// console.log("成功捏");
+		function(data) {
 			data = $.parseJSON(data);
-			if (data.code==0){
-				$("#hintBody").text("发送成功");
-			}else{
+			if(data.code == 0) {
+				$("#hintBody").text("发送成功!");
+			} else {
 				$("#hintBody").text(data.msg);
 			}
+
 			$("#hintModal").modal("show");
 			setTimeout(function(){
 				$("#hintModal").modal("hide");
@@ -28,8 +26,6 @@ function send_letter() {
 			}, 2000);
 		}
 	);
-
-
 }
 
 function delete_msg() {

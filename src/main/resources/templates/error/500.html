@@ -4,23 +4,20 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		  crossorigin="anonymous">
-	<link rel="stylesheet" href="../../css/global.css" th:href="@{/css/global.css}"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/global.css}" />
 	<title>牛客网-500</title>
 </head>
 <body>
 <div class="nk-container">
 	<!-- 头部 -->
-	<header class="bg-dark sticky-top" th:replace="index :: header">
+	<header class="bg-dark sticky-top" th:replace="index::header">
 		<div class="container">
 			<!-- 导航 -->
 			<nav class="navbar navbar-expand-lg navbar-dark">
 				<!-- logo -->
 				<a class="navbar-brand" href="#"></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<!-- 功能 -->
@@ -30,8 +27,7 @@
 							<a class="nav-link" href="../../index.html">首页</a>
 						</li>
 						<li class="nav-item ml-3 btn-group-vertical">
-							<a class="nav-link position-relative" href="../letter.html">消息<span
-									class="badge badge-danger">12</span></a>
+							<a class="nav-link position-relative" href="../letter.html">消息<span class="badge badge-danger">12</span></a>
 						</li>
 						<li class="nav-item ml-3 btn-group-vertical">
 							<a class="nav-link" href="../register.html">注册</a>
@@ -40,10 +36,8 @@
 							<a class="nav-link" href="../login.html">登录</a>
 						</li>
 						<li class="nav-item ml-3 btn-group-vertical dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<img src="http://images.nowcoder.com/head/1t.png" class="rounded-circle"
-									 style="width:30px;"/>
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<img src="http://images.nowcoder.com/head/1t.png" class="rounded-circle" style="width:30px;"/>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item text-center" href="../profile.html">个人主页</a>
@@ -56,7 +50,7 @@
 					</ul>
 					<!-- 搜索 -->
 					<form class="form-inline my-2 my-lg-0" action="../search.html">
-						<input class="form-control mr-sm-2" type="search" aria-label="Search"/>
+						<input class="form-control mr-sm-2" type="search" aria-label="Search" />
 						<button class="btn btn-outline-light my-2 my-sm-0" type="submit">搜索</button>
 					</form>
 				</div>
@@ -67,7 +61,7 @@
 	<!-- 内容 -->
 	<div class="main">
 		<div class="container pl-5 pr-5 pt-3 pb-3 mt-3 mb-3">
-			<img src="../../img/error.png" th:src="@{/img/error.png}">
+			<img th:src="@{/img/error.png}" >
 		</div>
 	</div>
 
@@ -77,8 +71,7 @@
 			<div class="row">
 				<!-- 二维码 -->
 				<div class="col-4 qrcode">
-					<img src="https://uploadfiles.nowcoder.com/app/app_download.png" class="img-thumbnail"
-						 style="width:136px;"/>
+					<img src="https://uploadfiles.nowcoder.com/app/app_download.png" class="img-thumbnail" style="width:136px;" />
 				</div>
 				<!-- 公司信息 -->
 				<div class="col-8 detail-info">
@@ -123,8 +116,7 @@
 								</li>
 								<li class="nav-item text-white-50">
 									京ICP备14055008号-4 &nbsp;&nbsp;&nbsp;&nbsp;
-									<img src="http://static.nowcoder.com/company/images/res/ghs.png"
-										 style="width:18px;"/>
+									<img src="http://static.nowcoder.com/company/images/res/ghs.png" style="width:18px;" />
 									京公网安备 11010502036488号
 								</li>
 							</ul>
@@ -135,9 +127,9 @@
 		</div>
 	</footer>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="http://cdn.staticfile.org/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="../../js/global.js" th:src="@{/js/global.js}"></script>
+<script th:src="@{/js/global.js}"></script>
 </body>
 </html>
