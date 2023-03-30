@@ -4,6 +4,8 @@ import com.nowcoder.community.dao.CommentMapper;
 import com.nowcoder.community.entity.Comment;
 import com.nowcoder.community.util.CommunityConstant;
 import com.nowcoder.community.util.SensitiveFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -12,10 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class CommentService implements CommunityConstant {
-
+//    private Logger logger = LoggerFactory.getLogger(CommentService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommentService.class);
     @Autowired
     private CommentMapper commentMapper;
 
@@ -56,4 +60,14 @@ public class CommentService implements CommunityConstant {
     public Comment findCommentById(int id) {
         return commentMapper.selectCommentById(id);
     }
+
+//    异步加载评论
+    public CompletableFuture<List<Comment>> asyncFindCommentsByEntity(int entityType, int entityId, int offset, int limit){
+        logger.info("开始异步加载评论");
+        return CompletableFuture.supplyAsync(()->{
+            List<Comment> commentList = findCommentsByEntity(entityType,entityId,offset,limit);
+            return commentList;
+        });
+    }
+
 }
