@@ -3,9 +3,6 @@
 ## 其他项目
 * 计算机类电子书仓库：https://github.com/cosen1024/awesome-cs-books
 * Java面试题仓库：https://github.com/cosen1024/Java-Interview
-## 项目演示
-演示地址: http://coolsen.cn/ <br>
-账号密码: aaa/aaa
 ## 技术选型
 ![](.images/arc.png)
 
@@ -16,18 +13,18 @@
 * 使用Kafka处理发送评论、点赞和关注等系统通知，并使用事件进行封装，构建了强大的异步消息系统。 
 * 使用Elasticsearch做全局搜索，并通过事件封装，增加关键词高亮显示等功能。 
 * 对热帖排行模块，使用分布式缓存Redis和本地缓存Caffeine作为多级缓存，避免了缓存雪崩，将QPS提升了20倍(10-200)，大大提升了网站访问速度。并使用Quartz定时更新热帖排行。 
-
+# 使用
 
 ## 开发环境
 
-| 工具          | 版本号 | 下载                              |
-| ------------- | ------ | --------------------------------- |
-| JDK           | 11     | https://openjdk.java.net/install/ |
-| Mysql         | 5.7    | https://www.mysql.com/            |
-| Redis         | 3.2    | https://redis.io/download         |
-| Elasticsearch | 6.4.3  | https://www.elastic.co/downloads  |
-| Kafka         | 2.3.0  |   https://kafka.apache.org/downloads                                |
-| nginx         | 1.10   | http://nginx.org/en/download.html | 
+| 工具          | 版本号   | 下载                              |
+| ------------- |-------| --------------------------------- |
+| JDK           | 11    | https://openjdk.java.net/install/ |
+| Mysql         | 8.0   | https://www.mysql.com/            |
+| Redis         | 3.2   | https://redis.io/download         |
+| Elasticsearch | 6.4.3 | https://www.elastic.co/downloads  |
+| Kafka         | 2.3.0 |   https://kafka.apache.org/downloads                                |
+| nginx         | 1.10  | http://nginx.org/en/download.html | 
 ## 运行效果展示
 * 首页
 ![](.images/index.png)
@@ -36,6 +33,9 @@
 ## 后续更新点
 * 增加收藏功能
 * 增强对话框功能
+* 私信更改为WebSocket实时通信
+* 前后端分离
+* 分布式部署
 ## 相关资源
 [相关的教程](https://pan.baidu.com/s/1LjYYwJVsqNBxq69udsXMvA):网盘提取码：wxdd 
 

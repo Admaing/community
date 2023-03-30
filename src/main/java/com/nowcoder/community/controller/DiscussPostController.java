@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author coolsen
@@ -110,8 +111,15 @@ public class DiscussPostController implements CommunityConstant {
         // 评论: 给帖子的评论
         // 回复: 给评论的评论
         // 评论列表
-        List<Comment> commentList = commentService.findCommentsByEntity(
-                ENTITY_TYPE_POST, post.getId(), page.getOffset(), page.getLimit());
+//        List<Comment> commentList = commentService.findCommentsByEntity(
+//                ENTITY_TYPE_POST, post.getId(), page.getOffset(), page.getLimit());
+        //                FIXME  使用异步加载评论，未测试是否成功
+        CompletableFuture<List<Comment>> commentFuture = commentService.asyncFindCommentsByEntity(ENTITY_TYPE_POST, discussPostId, page.getOffset(), page.getLimit());
+        CompletableFuture.allOf(commentFuture).join();
+        List<Comment> commentList = commentFuture.join();
+//                commentService.asyncFindCommentsByEntity(
+//                ENTITY_TYPE_POST, post.getId(), page.getOffset(), page.getLimit());
+
         // 评论VO列表
         List<Map<String, Object>> commentVoList = new ArrayList<>();
         if (commentList != null) {
@@ -130,8 +138,11 @@ public class DiscussPostController implements CommunityConstant {
                 likeStatus = hostHolder.getUser() == null ? 0 : likeService.findEntityLikeStatus(ENTITY_TYPE_COMMENT, comment.getId(), hostHolder.getUser().getId());
                 commentVo.put("likeStatus", likeStatus);
                 // 回复列表
+
                 List<Comment> replyList = commentService.findCommentsByEntity(
                         ENTITY_TYPE_COMMENT, comment.getId(), 0, Integer.MAX_VALUE);
+
+
                 // 回复VO列表
                 List<Map<String, Object>> replyVoList = new ArrayList<>();
                 if (replyList != null) {
